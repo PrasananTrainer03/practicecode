@@ -1,0 +1,298 @@
+Exception Handling : 
+____________________
+
+It is a mechanism of handling the runtime errors, during execution of the program. There are 2 types of errors known as 
+
+	(i) Compile Time 
+
+	(ii) Runtime 
+
+To handle runtime errors, we have different blocks as
+
+1) try block : This block contains statements in which there is possibility of getting runtime errors. The statements which are placed in this block are treated as heavy weighted statements as JVM allocates excess memory to them. 
+
+2) catch block : Once exception raised in try block, then control will be forwarded to catch block, this block contains the alternate statements for exceptions raised in try block.  One try block can contains multiple catch blocks. 
+
+3) finally block : This block contains statements that needs to be executed mandetorily irrespective of try 
+and catch blocks. This block is not mandetory, but all the statements which are placed in this block are executed as mandetory statements. 
+
+Exception is the top most class, from which all kinds of exceptions are derived. 
+
+try {
+....
+....
+} catch(Exception e) {
+...
+...
+...
+} finally {
+....
+....
+....
+}
+
+printStackTrace() : Used to display entire information about the error. 
+
+Exception conatins errorMessage, errorLineNumber, errorDescription etc... 
+
+All the details will be printed using printStackTrace()
+
+Integer.ParseInt() : used to convert string to integer. 
+
+
+What is the top level class in java 
+
+java.lang.Object is the top level class. 
+
+Object 
+
+Default package in java is 
+
+java.lang 
+
+Types of Exceptions : 
+________________________
+
+
+There are 2 types of exceptions known as 
+
+1) Checked Exceptions : These are the exceptions that which occurs at compile time, during compilation jvm feels some erroneous code is there and stops the execution at compile time, and can be handled at method level by using throws keyword. 
+
+2) Unchecked Exceptions : These are the exceptions that which occurs at runtime, can be handled by using 
+try...catch block. 
+
+How to deal with Date
+
+java.util is package used in collections. 
+
+For date we need to use java.util.Date package. 
+
+You can import util package as 
+
+import java.util.Date;
+
+To convert String to date, we need the help of 
+
+SimpleDateFormat 
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+format() : Used to convert Date to String 
+
+parse() : used to convert String to date. 
+
+you can import SimpleDateFormat as 
+
+import java.util.SimpleDateFormat 
+
+throw keyword : If you want to throw an exception object based on condition, then 
+we need the help of throw keyword. 
+
+Write a Program as 
+
+Read a number, if number < 0 then throw ArithmeticException,
+	       if number = 0 then throw NumberFormatException
+
+else print the number. 
+
+
+What is the difference between throw and throws 
+_________________________________________________
+
+Throws will be at method level, where throw will be at code level. 
+Throws used to throw the Exception class, where throw will be used to throw Exception object. 
+
+System exceptions are inadequate to handle in all situations, then we need the help of 
+CustomException. 
+
+Any class that which derived from Exception can be treated as CustomException.
+
+If you define any exception class, then its your job to throw the error message. 
+
+Write a Program as Sum of 2 Numbers, 
+
+if any number < 0 then throw NegativeException (create class)
+
+if any number = 0 then throw NumberZeroException (create class) 
+
+else calculate sum and print 
+
+
+___________________________________________________________________________________
+
+Collections : 
+
+Arrays are basically static data structures, as once they are assigned we cannot change the size. 
+
+But, if you want to enter elements irrespective of size, then we need the help of collections. 
+
+Collections are used to store data w.r.t. Object format.
+
+java.util is the package that which allows you to deal with collections. 
+
+Scanner : used to read the custom input from the keyboard. 
+
+Scanner sc = new Scanner(System.in);
+
+readLine() -> used to read one entire line. 
+
+read() : Used to read one word.
+
+readInt() -> Reads integer value
+
+readDouble() -> Reads the double value. 
+
+List Interface : This interface extends the collection to handle sequence or a list of objects. Elements can be inserted in a list and can be accessed from a list using their index pos. in the list. 
+
+ArrayList and LinkedList are falling under List interface. 
+
+Will List can contains Custom Class Objects ???
+
+Yes 
+
+Employ emp = new Employ() -- willl not work if you dont define any default constructor. 
+
+Set interface : Used to eliminate the duplicate entries from the given collection. 
+
+Here, we have HashSet() and LinkedHashSet() are falling under Set interface. 
+
+HashSet() displays data in random order, where 
+
+LinkedHashSet used to display data w.r.t. Insertion Order. 
+
+SortedSet : Used to display data w.r.t. Sorted Order 
+
+TreeSet is falling under SortedSet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What is the Drawback with Collections ???
+
+Collections will not support as
+
+	-> Securing data
+
+	-> Typecasting
+
+	-> No Reusability of code
+
+These you need to overcome, then we need the help of Generics. 
+
+Generics provides an opportunity to protect a field in a class. 
+
+If you want to write methods as write once and apply for all types, then we need the help of 
+generics. 
+
+You can define generics as <T> 
+
+In place of <T> we can define any value type/refernce type/custom type. 
+
+Advantages : 
+______________
+
+	Write One and apply for all types
+
+	No Typecasting
+
+	Reduces the size of the program
+
+	Provides security to the data. 
+
+
+
+Properties : Provides an opportunity to protect a field in a class. 
+
+If you want to make any method as a field, then we need the help of property, as you can control the internal behaviour. 
+
+we have getters and setters 
+
+for readonly property we dont have any setter
+
+for writeonly property we dont have any getter 
+
+you can add both if needed. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

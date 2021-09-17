@@ -1,0 +1,71 @@
+Following details for Customer,
+- CustomerId
+- CustomerName
+- Username
+- Password
+- Phone no
+- Wallet balance
+- Address
+ Following details for Vendor,
+- VendorId
+- VendorName
+- UserName
+- Password
+- Phone no
+- Address
+ Following details for Menu,
+- FoodId
+- FoodItem
+- Amount
+
+
+HotelData(CustomerId,CustomerName,CusUser,CusPassword,CusPhone,Walletbalance,Address,
+VendorId,VendorName,VenUser,VenPassword,VenPhone,Address,FoodId,FoodItem,Amount) 
+
+
+Customer()
+
+One customer have multiple vendors, 
+
+One vendor can serve for multiple customers
+
+One FoodItem can be ordered by multiple customers 
+
+A customer can order Multiple Food Items 
+
+Its purely many to many relationship
+
+Without Customer vendor exists or not
+
+Without Vendor customer will exist or not
+
+Without customer and Vendor Menu exist or not 
+
+So, the final tables are
+
+Customer(CustomerId+,CustomerName,Username,Password,Phoneno,City,State,ZipCode)
+Vendor(VendorId+,VendorName,VenUser,VenPassword,VenPhone,City,State,ZipCode)
+Menu(MenuId+,MenuName,MenuPrice,Rating)
+
+Orders(CustomerID-,VendorID-,MenuId-,ordQty,BillAmount,OrderStatus,OrderComments)
+
+
+Here for primary key 
+
+	-> CustomerId+VendorID+MenuId as primary key
+	-> Introduce field as OrderId and make primary key both are solutions. 
+
+
+Wallet(WalletID,CustomerID-,WalletType,WalletAmount) 
+
+Normalize this with above tables and send me
+
+walType as PHONEPE,GPAY,PAYTM
+
+
+Customer(CustomerId+,CustomerName,Username,Password,Phoneno,City,State,ZipCode)
+Vendor(VendorId+,VendorName,VenUser,VenPassword,VenPhone,City,State,ZipCode)
+Menu(MenuId+,MenuName,MenuPrice,Rating)
+Wallet(WalletID+,CustomerID-,WalletType,WalletAmount) 
+Orders(CustomerID-,VendorID-,MenuId-,ordQty,BillAmount,OrderStatus,OrderComments)
+

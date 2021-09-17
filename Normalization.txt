@@ -1,0 +1,296 @@
+
+
+1) Database 
+
+    Set of interrelated files stored with min. redundancy to serve many users work concurrently.
+
+2) DBMS 
+
+	The software that which allows you to perform transactions on data like adding new Data, 
+Modifying already existing data and removing unwanted data known as DBMS. 
+
+Objectives : 
+______________
+
+    Provides an efficient and convinient env, that which allows you to store data in and retrieve data
+
+    Granting access on data to users based on their credentials.
+
+Drawbacks : 
+___________
+
+   -> Data redundancy
+
+   -> risk to data integrity
+
+   -> Data Isolation  
+
+   -> Difficult Access to Data 
+
+   -> Unsatisfactory Security Measures 
+
+
+
+Data Model :
+
+Types of Data Model 
+
+  -> Object Based
+
+  -> Record Based 
+
+ER model (Entity Relationship Model)
+
+   Entity is the thing, which we can easily identified. 
+
+
+Relational system undergone with concept of keys 
+
+Agent(AgentId,FirstName,LastName,City,State,AadharNo,PanNo)
+
+1) Candidate Key : Any key that which uniquely identifies rows of a table known as candidate key. 
+
+		(AgentID, AadharNo, PanNo) 
+
+2) Primary Key : One of the candidate key needs to be chosen as primary key based on priority. 
+
+		(AgentID) 
+
+3) Alternate Key : Any key that which is candidate key, but not primary key known as alternate key. 
+
+		(AadharNo, PanNo) 
+
+4) Composite Key : Any key that which uniquely identifies rows of a table made up of more than one attribute
+		known as Composite key. 
+
+5) Foriegn Key : Primary key in the parent table will be foreign key in the child table. 
+
+
+Normalization : 
+
+Breaking down the complex table structures into simple table structures by using certain rules. 
+
+Take an example of table 
+
+Employ(Empno,Ename,DeptCode,DeptHead,ProjCode,Hours) 
+
+E001,Hari,D001,Vimala,(P001,P002,P003),(56,63,77) 
+
+First Normal Form : 
+____________________
+
+	A table said to be in 1NF, when each cell contains precisely one value (Atomic Values) 
+
+By Applying 1NF 
+
+E001,Hari,D001,Vimala,P001,56
+E001,Hari,D001,Vimala,P002,56
+E001,Hari,D001,Vimala,P001,56
+
+INSERT : The department of the particular employee cannot be recorded until the employee is assigned a project. 
+
+UPDATE :  The Employee Code, Department Code, and department head are repeated several times, if an employee is transferred to another dept. this change will have to be recorded in every row of the EMPLOYEE table pertaining to that employee. 
+
+DELETE : When an employee completes work on the project, the employee's record to be deleted. The info. regarding the department to which the emplyee belongs will also to be lost. 
+
+1NF inadequate to handle this situation. So we need to move to 2NF. 
+
+Second Normal Form :
+____________________
+
+A table said to be in 2NF, at first it must be in 1NF, and every attribute functionally dependent on whole key but not part of the key. 
+
+Attribute A functionally dependent on attribute B or not we have to check 
+
+Employ(Empno,Ename,DeptCode,DeptHead,ProjCode,Hours) 
+
+In the above table, 
+
+Empno is the whole key (primary key) 
+
+Empno -> Ename 
+Empno -> DeptCode 
+Empno -> DeptHead 
+
+Empno -> ProjCode (X)
+Empno -> Hours (X) 
+
+Guidelines : 
+______________
+
+	-> Find and remove attributes that are not functionally depending on primary key
+
+	-> Group the remaining attributes. 
+
+By applying 2NF 
+
+
+Employ(Empno+,Ename,DeptCode,DeptHead)
+Project(Empno-,ProjCode,Hours) 
+
+Empno is primary key in Employ table and Foreign key in Project Table
+
+Once employee joins his record stored in Employ table, after project assigns then his record comes to 
+Project Table. If any employ handles more than one project, more records in Project table not in Employ table. 
+
+INSERT : The DEPTHEAD of a new dept that does not have any employees at the present cannot be entered in the 		DEPTHEAD column. 
+
+UPDATE : the DEPTHEAD is repeated several times, hence if a dept head moves to another dept, the change will have to be made consistently across the table. 
+
+DELETE : If the record of the employee is deleted, then the information regarding the head of the dept will also to be deleted. Hence there will be a loss of information. 
+
+So, 2nd Normal Form inadequte to handle in this situation. 
+
+Third Normal Form : 
+____________________
+
+	A table said to be in 3NF, at first it must be in 2NF, and every attribute need to be depend on 
+	whole key but not transitively. 
+
+Compare Attributes as there any transitive dependency is there ???
+
+
+Guidelines : 
+____________
+
+Find and remove attributes that are transitively depending on whole key
+Group the remaining attributes. 
+
+By Applying 3NF 
+
+
+Dept(DeptCode+,DeptHead)
+Employ(Empno+,DeptCode-,Ename)
+Project(Empno-,ProjCode,Hours) 
+
+Project table table ProjCode+Empno as primary key 
+
+
+
+AgentPolicy(AgentId,FirstName,LastName,City,State,PolicyID,Installment,totalPremium,PayMode)
+
+Above table normalize and show the result
+
+AgentPolicy(AgentId,FirstName,LastName,City,State,PolicyID,Installment,totalPremium,PayMode)
+
+1NF as One agent can do multiple policies. 
+
+INSERT : Agent Details cannot be enterted till he do any policy. 
+
+Update : PolicyId, Installment etc... All details repeated multiple times, so if any change that needs to be reflected across all records. 
+
+DELETE : If any agent resigns his job, the list of policies he did also to be deleted. 
+
+
+1NF inadequate to handle in this sitution : 
+
+2NF : Check the functional dependency 
+
+    AgentID i am taking as whole key (primary key) 
+
+	AgentID => FirstName 
+                => LastName
+		=> City
+		=> State
+		=> PolicyID (X)
+		=> Installment (X)
+		=> TotalPremium (X)
+		=> PayMode (X) 
+
+ Guidelines : 
+
+	=> Find and remove attributes that are not functionally depending on whole key
+
+	=> Group the remaining attributes. 
+
+Agent(AgentId,FirstName,LastName,City,State)
+Policy(AgentID-,PolicyID,Installment,TotalPremium,PayMode) 
+
+INSERT : In Policy Table, unless agentId is not there policy details cannot be entered
+(Its wrong as policy exists even no agent is there) 
+
+UPDATE : PolicyID, Installment all are repeated multiple times, 
+
+DELETE : If any policy Record deleted, then the agentId details also to be lost 
+
+*** 2NF inadequate ***
+
+3NF : Transitive Depedency 
+
+Guidelines : 
+
+	-> Find and remove attributes that are transitively depending on whole key
+	-> Group the remaining attributes. 
+
+
+Agent(AgentId+,FirstName,LastName,City,State)
+Policy(PolicyID+,Installment,TotalPremium,PayMode) 
+AgentPolicy(AgentID-,PolicyID-)
+	AgentID+PolicyID as (primary key) 
+
+
+
+Following details for Employees,
+- EmployeeId
+- EmployeeName
+- MobileNo
+- DateOfJoining
+- Leave Balance
+- ManagerId
+- Department
+ Following details for Leave,
+- LeaveId
+- No Of Days
+- Leave Start date
+- Leave End date
+- Leave Type
+- Leave Status
+- Leave Reason
+- Leave Applied Date
+- Leave Comments
+
+
+Normalize and show the result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

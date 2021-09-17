@@ -1,0 +1,467 @@
+
+Mongo DB
+
+CODD Rules
+
+Normalization 
+
+Perform CRUD Operations using MONGODB 
+
+CODD Rules : 
+______________
+
+Any relational system said to be truely relational if it satisfies 12 CODD rules 
+
+EF CODD implemented all these rules. 
+
+(i) Information representation : Information needs to be represented in table and columns format. 
+
+(ii) Guaranteed Access : Every data value in the relational database should be logically accessable by 
+specifying a combination of table name and primary key column name. 
+
+(iii) Systematic Treatment of NULL values
+
+	Database must allow NULL values to support any missing or inapplicable information. They must
+be different from zero or spaces.	
+
+(iv) Data Description Rule 
+
+	The datbase categorized in 2 ways as 
+
+	    (a) System Catalog
+
+	    (b) User Catalog
+
+(v) Comprehensive Data Sublangauge : This rule states that system must support all the follwing functions as
+
+		(i) Data Definition
+
+		(ii) View Definition
+
+		(iii) Data Manipulation Operations
+
+		(iv) Security and Integrity Constraints. 
+
+(vi) View Updating : 
+
+(vii) High Level Insert, Update and Delete : Ensures that rows should be treated as sets in INSERT, UPDATE
+	and DELETE Operations, It stresses the set oriented nature of database. 
+
+(viii) Physical Data Independence : Application programs must remains unimpaired when any changes made in the storage representation or access methods. 
+
+(ix) Logical Data Independence : Changes does not affect the users ability to work with data. 
+
+(x) Data Distribution Rule : Databases must allow manipulation of distributed data located on other 
+computer systems. 
+
+(xi) Non-Subversion : No other language cannot subver or bypass the integrity rules and constarint. DBMS must ensure that no other level can bypass the constraints specified by the database. 
+
+(xii) Integrity Rule : All integrity constraints must be storable in system catalog. 
+
+___________________________________________________________________________________
+
+Normalization : 
+
+Is a scientific method of breaking down the complex table structures into simple table structure by using
+certain rules. Using this we can reduce the redundancy in a table and eliminate the problems of inconsisteny and disk space usage. 
+
+There are various normal forms as 
+
+Project(Ecode,Ename,DeptCode,DeptHead,ProjCode,Hours) 
+
+(i) First Normal Form : A table said to be in 1NF, when each cell contains precisely one value. 
+
+    E001,Sunil,D001,'Prasanna',(P001,P002,P003),(56,110,88)
+
+By Applying first normal form
+
+    E001,Sunil,D001,'Prasanna',P001,56
+    E001,Sunil,D001,'Prasanna','P002,110
+    E001,Sunil,D001,'Prasanna',P003,88
+
+To checks 1NF adequate or not, we have to check for 
+
+Project(Ecode,Ename,DeptCode,DeptHead,ProjCode,Hours) 
+
+Insert : You cannot enter any employee record till he got any project. 
+
+Update : EmployeeCode, DeptCode,DeptHead Repeated multiple times, then if any change happens that needs to be reflected in all corresponding rows means its highly tedious. 
+
+Delete : If any employee completes his project, then his record to be deleted. Then info regarding his 
+Dept details and employee details all to be deleted automatically. 
+
+So 1NF inadequate in all the above situations. 
+
+(ii) Second Normal Form : A table said to be in 2NF, at first it must be 1NF, and every attribute functionally dependent on whole key(primary key) but not as part of the key. 
+
+       Ecode as whole key 
+
+	Ecode => Ename (Y)
+
+	Ecode => DeptCode (Y)
+
+	Ecode => DeptHead (Y)
+
+	Ecode => ProjCode (N)
+
+	Ecode => Hours  (N)
+
+Guidelines : 
+
+	-> Find and remove attributes that are not functionally dependent on whole key 
+
+	-> Group the remaining attributes. 
+
+
+Employee(Ecode+,Ename,DeptCode,DeptHead)
+Project(Ecode-,ProjCode,Hours)
+
+INSERT : Dept Details cannot be entered until you dont have any Employee. 
+
+UPDATE : DeptCode and DeptHead are repeated multiple times, then if any DeptHead moves to another dept,
+		then the change needs to be reflected across all corresponding records. 
+
+DELETE : IF any employee resigns his job, then his details to be deleted apart from that the dept he worked
+		those details also to be deleted. 
+
+So 2NF inadequate, as transitive dependecy is coming. 
+
+(iii) Third Normal Form : A table said to be in 3NF, at first it must be in 2NF, and 
+	every attribute functionally dependent on whole key but not transitively. 
+
+Guidelines : 
+______________
+
+	-> Find and remove attributes that are transitively dependent on whole key
+
+	-> Group the remaining attributes. 
+
+By Applying 3NF 
+
+Employee(Ecode+,Ename,DeptCode,DeptHead)
+
+Project(Ecode,Ename,DeptCode,DeptHead,ProjCode,Hours) 
+
+
+Dept(DeptCode+,DeptHead)
+Employee(Ecode-,Ename)
+Project(Ecode-,ProjCode,Hours)
+
+
+______________________________________________________________________________________________________
+
+After download and install mongodb, then you need to specify the path to store the mongodb databases and documents. 
+
+**** Create a folder as data in c drive ***
+
+
+mongod --dbpath c:\data
+
+then the instance is running continuously and you can work with mongo db
+
+Now, to start the client instance of mongodb, then use the command as
+
+mongo 
+
+___________________________________________________________________________________________
+
+ db.employ.insertMany(
+... [
+...        {
+...            empno:1,
+...            name:"Prasanna",
+...            dept:"Dotnet",
+...            desig:"Trainer",
+...            basic:88423
+...        },
+...        {
+...            empno:2,
+...            name:"Babu",
+...            dept:"Java",
+...            desig:"Trainer",
+...            basic:88111
+...        }
+...  ])
+
+
+
+
+db.employ.insertMany(
+    [
+	{
+	      empno:3,
+              name:'Naman',
+	      dept:'Java',
+              desig:'Expert',
+              basic:88222
+	},
+	{
+	      empno:4,
+              name:'Harish',
+	      dept:'Java',
+              desig:'Programmer',
+              basic:90233
+	},
+	{
+	      empno:5,
+              name:'Anupriya',
+	      dept:'Angular',
+              desig:'Programmer',
+              basic:91933
+	}
+    ])
+
+_______________________________________________________________
+
+To see the list of tables/collections in the databse, then 
+
+db.getCollectionNames()
+
+
+1) What is Cloud
+
+2) What is AWS
+
+3) What are AWS Services are available 
+
+
+Cloud computing is an internet-based service in which large group of remote servers are networked to allow
+data to be stored in cengtralized location and provides online access to the resources. 
+
+Using this, organizations can use shared computing and storages resources. 
+
+
+   Cloud computing provides services for 
+
+		-> Mobile
+
+		-> Applications
+
+		-> Database
+
+		-> private/public and hibrid
+
+		-> Server
+
+		-> Storage
+
+
+
+   -> Has provision to access or release resources on demand
+
+   -> Resources can be accessable w.r.t. Proper security 
+
+   -> Customers can be charged as per the type of resource they are using 
+
+
+For this we have 3 types of Clouds as
+
+ 
+   -> Public Cloud
+
+         The services providers make resources and data av aialble to their customers
+		via iinternet. Here, very less scope for security. 
+
+		public cloud have chars. as -> Scallable -> Reliable -> Inexpensive
+			         -> Location Independent 
+
+   -> Private Cloud
+
+	 Provides almost similar features as public, but the data and services are managed by the 
+	organization or third party. 
+
+		-> Scallable  -> Secure -> Flexible -> Greater Continue 
+
+   -> Hybrid Cloud
+
+	A combination of both private and publc cloud, the decision to run on 
+	private or public clould usually depends on various parameters like sensitivity
+	of data and applications. 
+
+		-> Secure -> Flexible -> Cost Effective 
+
+Service Models : 
+________________
+
+     -> SAAS  -> Software as Service : Directly providing the software to the customer, without making
+		   any server or dashboard available to them .
+
+		Ex : Webex, Teams, Google Meet
+
+     -> PAAS  -> Platform as Service : ONe does not get access the Whole Infra, rather access given to particular dashboard level. 
+
+	Ex : Visual Studio, Eclipse, Workbench etc...
+
+     -> IAAS  -> Infrastructure as a Service : Refers to providing the complete access to the server OS. 
+
+	Example Virtual Network, VPN, VMWARE etc...
+
+
+
+Why to Use Cloud : 
+___________________
+
+	-> Cost-Efficient
+
+	-> Reliability 
+
+	-> Backup & Recovery
+
+	-> Easy Access of Information 
+
+
+AWS (Amazon Web Services) 
+
+	is a cloud service from Amazon, which provides services in the form of building blocks, these building blocks can be used to create and deploy any type of application in the cloud. 
+
+AWS (EC2) 
+
+	Elastic Compute Cloud 
+
+is a web service, that prvoides resisable capacity in the AWS cloud. 
+
+EC2 instances can be resized and the no.of instances scaled up or down as per requirement
+
+These instances can be launched in on or more locations. Available Zones
+
+Each region we have distinct locations, connected by low latency networks in the same region.
+
+In that we have some sub services 
+
+	Amazon RDS : Is a fully Managed SQL Database cloud service, allows to create and operate 
+		relational databases. Using RDS you can accesss your files and database 
+		anywhere and scalable way. 
+
+	Amazon S3 : Simple Storage Service 
+
+		High speed, low cost web based service designed for online backup and 
+		archiving of data and application programs. 
+
+		It allows you to store upto 5gb data of any type of files.
+
+		This service allows the subscribers to access the same systems that 
+		Amazon to run on its own sites. 
+
+		Subscriber needs to has control over data, its private/public 
+
+
+
+	Azure Computing Services 
+
+	    Virtual Machines
+
+		Allows you to deplooy any workload, programming language and 
+			any OS virtually.
+
+	  Container Services
+
+		Creates container hosting solutions for Azure
+
+		Kubernites, Dockers and Visual Studio and SSMS etc... comes with 
+			Container Services
+
+
+	Azure Networking Services 
+
+		Connect privately and securely to cloud w.r.t. Proper routing
+
+		Obtains unmatched availability and performance over load balancer
+
+		Process data w.r.t. VPN Gateway
+
+
+	In this we have different gateways as
+
+		-> VPN
+
+		-> Load Balancer
+
+		-> Application Gateway
+
+		-> VPN gateway
+
+		-> Azure DNS
+
+		-> CDN (Content Delivery Network)
+
+		-> Express Route 
+
+
+
+	Virtual Network 
+
+		performs netework isolation and segmentation
+
+		Filter and route network traffic
+
+	Load Balancer 
+
+		Delivers high availability and network perforamnce for your applications
+
+		Forward the traffic to highly avaialble network services
+
+	VPN Gateway
+
+		Used for provide application delivery controller as a service
+
+		Comprised of multiple worker instances for scalibility and availabiliy
+
+	CDN (Content Delivery Network)
+
+		Caches static web content at place locations to provide and deliver 
+		content to the users. 
+
+	Express Route 
+
+		Lets you to establish connections to authroized Cloud tools. 
+
+	
+
+
+create table Orders
+(
+    orderId INT primary key auto_increment,
+    OrderStatus ENUM('PENDING','ACCEPTED','REJECTED')
+)
+
+___________________________________________________________________________
+
+How to create a database
+
+use db_name 
+
+to see the current database
+
+db
+
+to see the list of databases 
+
+show dbs
+
+to ensure the database to be identified as db, then atleaset one document to be available. 
+
+To create and insert document 
+
+db.emp.insert({"name":"Prasanna"})
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+

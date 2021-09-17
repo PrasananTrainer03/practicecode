@@ -1,0 +1,6 @@
+With spring.application.name, we specify the program's name. The port on which the service will listen is specified with server.port. And, most importantly, because the above values are optional, they are the parameters of the Eureka server.
+
+eureka.client.register-with-eureka = false - Makes it so the server does not attempt to register itself.
+eureka.client.fetch-registry = false - With this, we inform customers that they must not store the data of the available instances in their local cache. This means that they must consult the Eureka server whenever they need to access a service. In production, this is often set to true to expedite requests. I must comment that this cache is updated every 30 seconds by default.
+
+Spring Cloud framework provides tools for developers to build a robust cloud application quickly. We can also build the microservice-based applications, for example, configuration management, service discovery, circuit breakers, intelligent routing, cluster state, micro-proxy, a control bus, one time tokens, etc. Using Spring Cloud, a developer can quickly develop services and applications that implement the design patterns. These patterns work well in any distributed environment, including the bear metal data centers, developer's laptop, and managed platform such as Cloud Foundry.
